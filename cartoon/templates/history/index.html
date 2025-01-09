@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}ホームページ{% endblock %}
+{% block h1 %}ようこそ、トムとジェリーの歴史サイトへ{% endblock %}
+
+{% block content %}
+  <div class="p-3 p-sm-6 mb-4 bg-body-tertiary">
+    <div class="container">
+        <img src="{% static 'images/Tom and Jerry.png' %}" alt="" width="466" height="302">
+        <h1 class="display-4">トムとジェリーとは</h1>
+        <p>『トムとジェリー』（英語:Tom and Jerry）は、1940年にウィリアム・ハンナとジョセフ・バーベラによって創作された、アメリカ合衆国のアニメーションシリーズ。<br>ネコのトムとネズミのジェリーが巻き起こすドタバタ劇を描いたカートゥーン、ギャグアニメである。映画会社メトロ・ゴールドウィン・メイヤー（MGM）が発表した短編アニメーション映画のシリーズを皮切りに、これまでに166本の短編作品、2本の長編映画、8作のテレビシリーズ、18本のOVAが製作されている（2023年現在）。<br>略称は「トムジェリ」（ワーナー・ブラザースウェブサイトより）、「TJ」など。</p>
+    </div>
+  </div>
+  <div class="container mt-2">
+    <h1>歴史一覧</h1>
+    <div class="row">
+        {% for item in object_list %}
+        <div class="col-md-3">
+            <div class="card" style="width: 17rem;">
+                <img src="{{ item.thumbnail.url }}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.era }}</h5>
+                    <p class="card-text">{{ item.year }}</p>
+                    <a href="{% url 'detail-cartoon' item.pk %}" class="btn btn-primary">詳細へ</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock %}

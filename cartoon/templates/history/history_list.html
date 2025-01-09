@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}歴史{% endblock %}
+{% block h1 %}トムとジェリーの歴史{% endblock %}
+
+{% block content %}
+    <div class="p-4 row">
+        {% for item in object_list %}
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ item.thumbnail.url }}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.era }}</h5>
+                    <p class="card-text">{{ item.year }}</p>
+                    <a href="{% url 'detail-cartoon' item.pk %}" class="btn btn-primary">詳細へ</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

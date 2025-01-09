@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}{{ object.era }}{% endblock %}
+{% block h1 %}{{ object.era }}{% endblock %}
+
+{% block content %}
+  <div class="p-4 container-fluid img-fluid">
+    <div class="pt-4 row">
+        <div class="col-sm-6 col-xs-6">
+            <img src="{{ object.thumbnail.url }}" alt="" height="280">
+        </div>
+        <div class="col-sm-6 col-xs-6">
+            <h2>{{ object.era }}</h2>
+            <h6>{{ object.year }}</h6>
+            <p>{{ object.description }}</p>
+            <a href="{% url 'list-cartoon' %}" class="btn btn-primary">一覧へ戻る</a>
+            <a href="{% url 'update-cartoon' object.pk %}" class="btn btn-primary">編集する</a>
+            <a href="{% url 'review' object.pk %}" class="btn btn-primary">レビュー・コメントを書く</a>
+        </div>
+    </div>
+  </div>
+  <div class="border p-4 mb-3">
+    <h3>コメント・レビュー</h3>
+    {% for review in object.review_set.all %}
+    <div>
+      <h3 class="h4">{{ review.title }}</h3>
+      <div class="px-2">
+        <span>投稿ユーザー：{{ review.user.username }}</span>
+        <h6>評価：{{ review.rating }}</h6>
+        <p>{{ review.content }}</p>
+        <span>{{ review.created_at }}</span>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

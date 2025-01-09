@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}コメント・レビュー機能{% endblock %}
+{% block h1 %}コメント・レビュー機能{% endblock %}
+
+{% block content %}
+  <form method="post" class="p-4 m-4 bg-light border border-primary rounded form-group">
+    {% csrf_token %}
+    <label>対象記事</label>
+    <input class="form-control" value="{{ cartoon.era }}" readonly>
+    <label>タイトル</label>
+    <input class="form-control" name="title">
+    <label>内容</label>
+    <textarea class="form-control" name="content" rows="3"></textarea>
+    <label>星評価</label>
+    <select class="form-control" name="rating">
+        <option value="0">☆☆☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="3" selected>★★★☆☆</option>
+        <option value="4">★★★★☆</option>
+        <option value="5">★★★★★</option>
+    </select>
+    <input type="hidden" name='cartoon' value="{{ cartoon.id }}">
+    <button type="submit" class="btn btn-primary mt-3">投稿</button>
+  </form>
+{% endblock %}
